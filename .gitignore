@@ -1,0 +1,13 @@
+# Libraries
+node_modules
+.yarn
+*.log
+package-lock.json
+yarn.lock
+
+# Bundle
+out/
+dist/
+
+.env
+.prettierignore
