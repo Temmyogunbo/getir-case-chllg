@@ -1,0 +1,25 @@
+export const GET_PRODUCTS = 'GET_PRODUCTS';
+export const PRODUCTS_RECEIVED = 'PRODUCTS_RECEIVED';
+export const PRODUCTS_FAILED = 'GET_PRODUCTS_FAILED';
+
+export const GET_COMPANIES = 'GET_COMPANIES';
+export const COMPANIES_RECEIVED = 'COMPANIES_RECEIVED';
+export const COMPANIES_FAILED = 'COMPANIES_FAILED';
+
+export const SET_TAGS = 'SET_TAGS';
+export const SET_ALL_TAGS = 'SET_ALL_TAGS';
+
+export const REMOVE_TAG = 'REMOVE_TAG';
+
+export const SET_BRANDS = 'SET_BRANDS';
+export const SET_ALL_BRANDS = 'SET_ALL_BRANDS';
+
+export const SET_SORT = 'SET_SORT';
+
+export const SET_PAGE_NUMBER = 'SET_PAGE_NUMBER';
+
+export const SET_ORDER = 'SET_ORDER';
+export const INCREMENT_ORDER = 'INCREMENT_ORDER';
+export const DECREMENT_ORDER = 'DECREMENT_ORDER';
+
+export const SET_ITEM_TYPE = 'SET_ITEM_TYPE';
