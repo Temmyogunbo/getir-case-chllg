@@ -1,11 +1,15 @@
 import { Product } from '../Product';
 import { IProduct, ItemTypes } from '../../types';
 import { useProducts } from './useProducts';
+import { Loading } from '../common/Loader';
+import isEmpty from 'lodash.isempty';
 
 export const Products = () => {
   const { models, operations } = useProducts();
   const { products} = models;
   const { handleSetProduct, handleSetItemType } = operations;
+
+  if(isEmpty(products)) return (<Loading />)
 
   return (
     <div className="px-2 py-4 ">
@@ -17,8 +21,7 @@ export const Products = () => {
     <div className="flex flex-wrap justify-center align-center p-4 bg-white">
 
       {
-
-    products?.map((product: IProduct, index: number) => {
+      products?.map((product: IProduct, index: number) => {
       return (
         <div key={`${product.name}-${index}`} className="">
         <Product product={product}  />

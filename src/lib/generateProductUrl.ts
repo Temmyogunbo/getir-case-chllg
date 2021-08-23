@@ -20,15 +20,14 @@ export const generateProductURL = ({ tags, brands, page, sort, itemType }: { tag
   const sortOrder = getSortOder(sort);
 
   const jointTags = tags.filter((tag) => tag !== 'All').map((tag) => `&tags_like=${tag}`).join('')
-  const tagQuery = tags.length === 0 ? '': jointTags;
-
-  const jointBrands = brands.filter((brand) => brand !== 'All').map((brand) => `&manufacturer=${brand}`)
-  const brandsQuery = brands.length === 0 ? '':  jointBrands;
+  const jointBrands = brands.filter((brand) => brand !== 'All').map((brand) => `&manufacturer=${brand}`).join('')
 
   const sortQuery = sortOrder ? `&_sort=${sortOrder[0]}&_order=${sortOrder[1]}` : ''
-
+  const tagQuery = tags.length === 0 ? '': jointTags;
+  const brandsQuery = brands.length === 0 ? '':  jointBrands;
   const itemTypeQuery = itemType ? `&itemType_like=${itemType}` : ''
 
   return `${API_URL}/products?_page=${page ?? 1}&_limit=${PAGE_SIZE}${sortQuery}${tagQuery}${brandsQuery}${itemTypeQuery}`
 
 }
+

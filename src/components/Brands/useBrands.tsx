@@ -1,10 +1,11 @@
 import {useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { ICompany } from '../../types';
+import { ICompany, IProduct } from '../../types';
 import compact from 'lodash.compact';
 import { setBrands, getProducts, setAllBrands } from '../../actions';
 import { useDispatch } from 'react-redux'
 import { getCompanies } from '../../selectors/companies';
+import { getProducts as getStateProducts } from '../../selectors/products';
 import { getSelectedBrands } from '../../selectors/brand';
 import { search } from '../../utils/search';
 
@@ -23,6 +24,7 @@ const getBrandsSlug = (companies: ICompany[]) => companies.map(({ slug }) => slu
 export const useBrands = () => {
   const companies = useSelector(getCompanies);
   const selectedBrands = useSelector(getSelectedBrands);
+  const products = useSelector(getStateProducts);
 
   const [brands, setBrandss] = useState<undefined | ICompany[]>([]);
   const [searchValue, setSearchValue] = useState<string>('');
@@ -35,12 +37,14 @@ export const useBrands = () => {
     }
   },[companies])
 
-  const isBrandSelected = (brand: string) => selectedBrands.includes(brand)
+  const isBrandSelected = (brand: string) =>{
+    return selectedBrands.includes(brand)
+  } 
 
   const handleBrand = (brand: ICompany) => {
 
     if(brand.slug === 'All') {
-      dispatch(setAllBrands(getBrandsSlug(companies)))
+      dispatch(setAllBrands(getBrandsSlug([{ slug: 'All', name: 'All'},...companies])))
     } else {
       dispatch(setBrands(brand.slug))
     }
@@ -64,7 +68,10 @@ export const useBrands = () => {
   }
 
   const countBrand = (brand: ICompany) =>  {
-    const brands = companies.filter((company: ICompany) => company.slug === brand.slug)
+    const brands = products.filter((product: IProduct) => product.manufacturer === brand.slug);
+
+    if(brand.slug === 'All') return products.length;
+
     return brands.length
   }
 

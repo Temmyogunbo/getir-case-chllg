@@ -2,11 +2,15 @@ import { Brand } from '../Brand';
 import React from 'react';
 import { SearchInput } from '../SearchInput';
 import { useBrands } from './useBrands';
+import { Loading } from '../common/Loader';
 
 export const Brands = () => {
   const { models, operations} = useBrands();
+
   const { brands, searchValue } = models;
   const {handleSearch, handleBrand, countBrand, isBrandSelected } = operations
+
+  if(brands && brands?.length <= 1) return (<Loading />)
 
   return (
     <div className=" px-2 py-4 mt-10">

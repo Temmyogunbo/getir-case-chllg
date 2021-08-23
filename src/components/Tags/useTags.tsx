@@ -1,23 +1,20 @@
 import { useSelector } from 'react-redux'
-import {  Tags } from '../../types';
+import {  IProduct, Tags } from '../../types';
 import { useState } from 'react'
 import compact from 'lodash.compact';
+import flatten from 'lodash.flatten';
+import uniq from 'lodash.uniq';
 import { useDispatch } from 'react-redux'
 import { setTags, getProducts, setAllTags} from '../../actions';
 import { getSelectedTags } from '../../selectors/tag';
+import { getProducts as getStateProducts } from '../../selectors/products';
 import { search } from '../../utils/search';
+
 const TagLists = Object.values(Tags);
-
-// export const searchTags = (searchValue: string) => ( tags: string[]) => {
-//   if(!searchValue) return ([]);
-
-//   return tags.map(tag => {
-//     if(tag.toLowerCase().includes(searchValue.toLowerCase())) return tag
-//   });
-// }
 
 export const useTags = () => {
   const selectedTags = useSelector(getSelectedTags);
+  const products = useSelector(getStateProducts);
 
   const [tags, setTagss] = useState<string[]>(TagLists);
   const [searchValue, setSearchValue] = useState<string>('')
@@ -53,7 +50,12 @@ export const useTags = () => {
   }
 
   const countTag = (tag: string) => {
-    const tags = TagLists.filter((list: string) => list === tag)
+    const productTags = flatten(products.map((product: IProduct) => product.tags));
+
+    const tags = productTags.filter((productTag) => productTag === tag);
+
+    if(tag === 'All') return productTags.length - uniq(productTags).length;
+
     return tags.length
   }
 
