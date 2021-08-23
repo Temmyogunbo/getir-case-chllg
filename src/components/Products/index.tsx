@@ -23,7 +23,7 @@ export const Products = () => {
       {
       products?.map((product: IProduct, index: number) => {
       return (
-        <div key={`${product.name}-${index}`} className="">
+        <div key={`${product.name}-${index}`}>
         <Product product={product}  />
         <div className="p-4">
 

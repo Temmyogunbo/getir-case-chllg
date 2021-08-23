@@ -20,7 +20,7 @@ export const Orders = () => {
     </div>
     <div className="flex justify-end mb-2 mt-4">
 
-    <button className="border-2 border-blue-400 p-3 text-blue-400 font-semibold">{totalOrder(orders)}</button>
+    <button className="border-2 border-blue-400 p-3 text-blue-400 font-semibold">£ {totalOrder(orders)}</button>
     </div>
     </div>
   )

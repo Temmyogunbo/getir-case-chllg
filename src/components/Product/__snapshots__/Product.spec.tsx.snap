@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Procduct Component should match snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="w-32 p-4"
+  >
+    <div
+      class="p-4 bg-gray-100 rounded-md"
+    >
+      <img
+        alt="Product"
+        class=""
+        src="/icons/product.jpeg"
+      />
+    </div>
+    <div>
+      <div
+        class=" p-2"
+      >
+        <span
+          class="text-blue-400 font-semibold"
+        >
+          £ 10
+        </span>
+      </div>
+      <div>
+        <span
+          class="text-gray-900 font-semibold leading-3 text-sm"
+        >
+          test
+        </span>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

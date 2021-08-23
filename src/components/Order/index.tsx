@@ -4,7 +4,7 @@ export const Order = ({ order, handleDecrementOrder, handleIncrementOrder }: {or
     <div className="flex flex-row p-2 justify-between border-b-2">
       <div className="p-2">
   <h3 className="text-gray-600 text-base font-medium">{order.slug}</h3>
-      <span className="text-blue-400 font-semibold">{order.price}</span>
+      <span className="text-blue-400 font-semibold">£ {order.price}</span>
 
       </div>
       <div className="flex flex-row cursor-pointer">

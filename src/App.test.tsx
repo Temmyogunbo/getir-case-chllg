@@ -11,6 +11,6 @@ test('renders product App', () => {
   </Provider>
 
   );
-  const linkElement = screen.getByText('Products');
+  const linkElement = screen.getByText('Tags');
   expect(linkElement).toBeInTheDocument();
 });

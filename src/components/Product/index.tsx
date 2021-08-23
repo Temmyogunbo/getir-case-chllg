@@ -8,7 +8,7 @@ export const Product = ({ product }: { product: IProduct }) => (
     <div>
     <div className=" p-2">
       <span className="text-blue-400 font-semibold">
-       {product.price}
+       £ {product.price}
       </span>
     </div>
     <div > 
