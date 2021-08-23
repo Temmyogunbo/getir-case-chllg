@@ -16,6 +16,7 @@
     "@types/react-dom": "^17.0.0",
     "axios": "^0.21.1",
     "env-var": "^7.0.1",
+    "express": "^4.17.1",
     "flatten": "^1.0.3",
     "flow": "^0.2.3",
     "json-server": "^0.16.3",
@@ -33,12 +34,11 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
-    "start": "json-server serve/db.json --static build",
-    "start-react": "craco start",
+    "start": "node server.js",
+    "start-dev": "craco start",
     "build": "craco build",
     "test": "craco test",
-    "eject": "react-scripts eject",
-    "dev-start-server": "json-server --watch db/db.json"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
