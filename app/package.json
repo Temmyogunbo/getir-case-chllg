@@ -37,8 +37,8 @@
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject",
-    "start-server": "json-server --watch db/db.json",
-    "lint:fix": "prettier --write '*/**/*.{js,ts, tsx}' && eslint --quiet --cache --fix '*/**/*.{js,ts, tsx}'"
+    "dev-start-server": "json-server --watch db/db.json",
+    "start-server": "npm run build && json-server serve/db.json --static build"
   },
   "eslintConfig": {
     "extends": [
