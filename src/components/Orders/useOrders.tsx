@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { getOrders } from '../../selectors/orders';
 import { incrementOrder, decrementOrder } from '../../actions';
-import { IOrder } from '.././../types';
+import { IOrder } from '../../types';
 
 export const useOrders = () => {
   const orders = useSelector(getOrders);
