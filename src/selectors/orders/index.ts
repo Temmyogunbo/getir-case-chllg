@@ -1,1 +1,1 @@
-export const getOrders= (state: any) => state.orderReducer.orders;
+export const getOrders = (state: any) => state.orderReducer.orders;

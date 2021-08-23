@@ -3,9 +3,9 @@ export enum CheckBoxType {
   Square = 'Square',
 }
 
-export enum  ProductType {
+export enum ProductType {
   mug = 'mug',
-  shirt = 'shirt'
+  shirt = 'shirt',
 }
 
 export interface IProduct {
@@ -37,8 +37,7 @@ export enum SortBy {
   OLD_TO_NEW = 'OLD_TO_NEW',
 }
 
-export interface IOrder extends IProduct{
-
+export interface IOrder extends IProduct {
   count?: number;
 }
 
@@ -50,35 +49,34 @@ export interface IInitialState {
   brandReducer: null | any;
   sortReducer: null | any;
   pageReducer: null | any;
-
-
+  itemTypeReducer: null | any;
 }
 
 export enum Tags {
   All = 'All',
   Trees = 'Trees',
-  Beach =  'Beach',
+  Beach = 'Beach',
   Ocean = 'Ocean',
   Water = 'Water',
   Animal = 'Animal',
   Bear = 'Bear',
-  Road =  'Road',
-  Rocks =  'Rocks',
-  Sunset =  'Sunset',
-  Rust =  'Rust',
-  Old =  'Old',
-  Car =  'Car',
-  Coffee =  'Coffee',
-  Fog =  'Fog',
-  People =  'People',
+  Road = 'Road',
+  Rocks = 'Rocks',
+  Sunset = 'Sunset',
+  Rust = 'Rust',
+  Old = 'Old',
+  Car = 'Car',
+  Coffee = 'Coffee',
+  Fog = 'Fog',
+  People = 'People',
   Dock = 'Dock',
   Person = 'Person',
-  Hills =  'Hills',
-  Animals =  'Animals',
-  Sheep =  'Sheep',
-  Lake =  'Lake',
-  Building =  'Building',
-  Metal  = 'Metal',
+  Hills = 'Hills',
+  Animals = 'Animals',
+  Sheep = 'Sheep',
+  Lake = 'Lake',
+  Building = 'Building',
+  Metal = 'Metal',
   Woman = 'Woman',
 }
 

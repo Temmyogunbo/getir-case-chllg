@@ -1,1 +1,1 @@
-export const getItemType= (state: any) => state.itemTypeReducer.itemType;
+export const getItemType = (state: any) => state.itemTypeReducer.itemType;

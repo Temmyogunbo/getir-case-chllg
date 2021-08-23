@@ -1,23 +1,22 @@
-import { useState } from 'react'
+import { useState } from 'react';
 import { SortBy } from '../../types';
-import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux';
 import { setSort, getProducts } from '../../actions';
 
 export const useSort = () => {
   const [sortBy, setSortBy] = useState('');
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const handleSort = (selectedSortBy: SortBy) => {
-    if(sortBy === selectedSortBy) {
-      setSortBy('')
-      dispatch(setSort(''))
+    if (sortBy === selectedSortBy) {
+      setSortBy('');
+      dispatch(setSort(''));
     } else {
       setSortBy(selectedSortBy);
-      dispatch(setSort(selectedSortBy))
+      dispatch(setSort(selectedSortBy));
     }
-    dispatch(getProducts())
+    dispatch(getProducts());
+  };
 
-  }
-
-  return { models: { sortBy,  }, operations: { handleSort }}
-}
+  return { models: { sortBy }, operations: { handleSort } };
+};

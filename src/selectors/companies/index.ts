@@ -1,1 +1,1 @@
-export const getCompanies = (state: any) => state.companyReducer.companies
+export const getCompanies = (state: any) => state.companyReducer.companies;

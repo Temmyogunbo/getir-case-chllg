@@ -1,9 +1,9 @@
-import {useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { ICompany, IProduct } from '../../types';
 import compact from 'lodash.compact';
 import { setBrands, getProducts, setAllBrands } from '../../actions';
-import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux';
 import { getCompanies } from '../../selectors/companies';
 import { getProducts as getStateProducts } from '../../selectors/products';
 import { getSelectedBrands } from '../../selectors/brand';
@@ -18,8 +18,8 @@ import { search } from '../../utils/search';
 //   });
 // }
 
-const getBrandsSlug = (companies: ICompany[]) => companies.map(({ slug }) => slug);
-
+const getBrandsSlug = (companies: ICompany[]) =>
+  companies.map(({ slug }) => slug);
 
 export const useBrands = () => {
   const companies = useSelector(getCompanies);
@@ -32,48 +32,55 @@ export const useBrands = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if(companies) {
-      setBrandss([{ slug: 'All', name: 'All'}, ...companies])
+    if (companies) {
+      setBrandss([{ slug: 'All', name: 'All' }, ...companies]);
     }
-  },[companies])
+  }, [companies]);
 
-  const isBrandSelected = (brand: string) =>{
-    return selectedBrands.includes(brand)
-  } 
+  const isBrandSelected = (brand: string) => {
+    return selectedBrands.includes(brand);
+  };
 
   const handleBrand = (brand: ICompany) => {
-
-    if(brand.slug === 'All') {
-      dispatch(setAllBrands(getBrandsSlug([{ slug: 'All', name: 'All'},...companies])))
+    if (brand.slug === 'All') {
+      dispatch(
+        setAllBrands(
+          getBrandsSlug([{ slug: 'All', name: 'All' }, ...companies]),
+        ),
+      );
     } else {
-      dispatch(setBrands(brand.slug))
+      dispatch(setBrands(brand.slug));
     }
-    dispatch(getProducts())
-  }
+    dispatch(getProducts());
+  };
 
-  const handleSearch = (event: any) => { 
+  const handleSearch = (event: any) => {
     const value = event.target.value;
 
     setSearchValue(value);
-    if(brands) {
-      if(value) {
+    if (brands) {
+      if (value) {
         const newBrands = search(value, 'name')(companies);
         // @ts-ignore
-        setBrandss(compact([...newBrands]))
-      } 
-      else {
-        setBrandss(companies)
+        setBrandss(compact([...newBrands]));
+      } else {
+        setBrandss(companies);
       }
-    } 
-  }
+    }
+  };
 
-  const countBrand = (brand: ICompany) =>  {
-    const brands = products.filter((product: IProduct) => product.manufacturer === brand.slug);
+  const countBrand = (brand: ICompany) => {
+    const brands = products.filter(
+      (product: IProduct) => product.manufacturer === brand.slug,
+    );
 
-    if(brand.slug === 'All') return products.length;
+    if (brand.slug === 'All') return products.length;
 
-    return brands.length
-  }
+    return brands.length;
+  };
 
-  return { operations: { handleSearch, handleBrand , countBrand, isBrandSelected }, models: { brands, searchValue }}
-}
+  return {
+    operations: { handleSearch, handleBrand, countBrand, isBrandSelected },
+    models: { brands, searchValue },
+  };
+};

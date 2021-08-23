@@ -4,46 +4,54 @@ import { Sort } from './components/Sort';
 import { Orders } from './components/Orders';
 import { Products } from './components/Products';
 import { getProducts, getCompanies } from './actions';
-import {  useEffect} from 'react';
-import { useDispatch } from 'react-redux'
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Brands } from './components/Brands';
 import { Tags } from './components/Tags';
 import Pagination from './components/Pagination';
 
 function App() {
-  const dispatch = useDispatch()
+  const [showMobileOrder, setShowMobileOrder] = useState(false);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getProducts())
-    dispatch(getCompanies())
-  }, [])
+    dispatch(getProducts());
+    dispatch(getCompanies());
+  }, []);
 
-  return ( 
-    <div className="grid grid-cols-12 gap-2  bg-gray-50">
+  const toggleMobileOrder = () => setShowMobileOrder(!showMobileOrder);
+
+  return (
+    <div className="grid grid-cols-12 gap-2  bg-gray-50 relative">
       <header className="row-auto col-span-12 bg-blue-400 py-3 flex">
-
-      <Header />
+        <Header toggleMobileOrder={toggleMobileOrder} />
       </header>
 
-          <aside className="col-span-3 xl:col-span-3 row-span-4 px-4 hidden lg:block">
-            <Sort />
-            <Brands />
-            <Tags />
-            </aside>
-          <main className="col-span-2 md:col-span-7 lg:col-span-6 xl:col-span-6 bg-transparent row-span-4 flex flex-wrap align-center">
-            <Products />
-            <Pagination />
-        </main>
+      <aside className="col-span-3 xl:col-span-3 row-span-4 px-4 hidden lg:block">
+        <Sort />
+        <Brands />
+        <Tags />
+      </aside>
+      <main className="col-span-12 md:col-span-7 lg:col-span-6 xl:col-span-6 bg-transparent row-span-4 flex flex-wrap align-center">
+        <Products />
+        <Pagination />
+      </main>
 
-          <aside className="col-span-5 lg:col-span-3 xl:col-span-3  row-span-4 px-4">
-            <Orders />
-          </aside>
+      <aside className="col-span-5 hidden md:block lg:col-span-3 xl:col-span-3  row-span-4 px-4">
+        <Orders />
+      </aside>
+
+      {showMobileOrder && (
+        <aside className="col-span-6 block md:hidden row-span-4 px-4 absolute top-20 right-0">
+          <Orders />
+        </aside>
+      )}
       <footer className="row-auto col-span-12 p-8">
-
-      <Footer />
+        <Footer />
       </footer>
-      </div>
-    );
+    </div>
+  );
 }
 
 export default App;

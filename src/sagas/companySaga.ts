@@ -9,15 +9,14 @@ const getCompanies = () => axios.get<IProduct[]>(`${API_URL}/companies`);
 
 function* fetchCompanies(): any {
   try {
-    const response = yield call(getCompanies);   
+    const response = yield call(getCompanies);
     yield put(getCompaniesSuccess(response.data));
-    
   } catch (error) {
-    yield put(getCompaniesFailure(error.message))
+    yield put(getCompaniesFailure(error.message));
   }
 }
 
 function* watchCompanies(): any {
   yield takeLatest(GET_COMPANIES, fetchCompanies);
 }
-export  { watchCompanies }
+export { watchCompanies };

@@ -7,9 +7,8 @@ import { store } from './store';
 test('renders product App', () => {
   render(
     <Provider store={store}>
-  <App />
-  </Provider>
-
+      <App />
+    </Provider>,
   );
   const linkElement = screen.getByText('Tags');
   expect(linkElement).toBeInTheDocument();

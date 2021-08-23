@@ -1,4 +1,3 @@
-
 import { Product } from './index';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
@@ -14,12 +13,10 @@ describe('Procduct Component', () => {
     tags: 'Trees',
     added: 12345,
     slug: 'test',
-  }
+  };
   it('should match snapshot', () => {
-    const { asFragment } = render(
-      <Product product={product} />,
-    );
+    const { asFragment } = render(<Product product={product} />);
 
     expect(asFragment()).toMatchSnapshot();
-  })
-})
+  });
+});

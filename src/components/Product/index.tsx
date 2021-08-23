@@ -6,15 +6,14 @@ export const Product = ({ product }: { product: IProduct }) => (
       <img className="" src="/icons/product.jpeg" alt="Product" />
     </div>
     <div>
-    <div className=" p-2">
-      <span className="text-blue-400 font-semibold">
-       £ {product.price}
-      </span>
-    </div>
-    <div > 
-      <span className="text-gray-900 font-semibold leading-3 text-sm">{product.name}</span>
-    </div>
-
+      <div className=" p-2">
+        <span className="text-blue-400 font-semibold">£ {product.price}</span>
+      </div>
+      <div>
+        <span className="text-gray-900 font-semibold leading-3 text-sm">
+          {product.name}
+        </span>
+      </div>
     </div>
   </div>
-)
+);
