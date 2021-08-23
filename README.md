@@ -46,7 +46,7 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 
 ## Architecture
 
-The app is structure following the MVP(model, view, presenter) architecture. This type of architecture cuts aross all frontend app development therereby making the codebase maintainable, testable and scalable. You can learn more [here](https://khalilstemmler.com/articles/client-side-architecture/architecture)
+The app is structure following the MVP(model, view, presenter) architecture. This type of architecture cuts aross all frontend app development therereby making the codebase maintainable, testable, flexible and scalable. You can learn more [here](https://khalilstemmler.com/articles/client-side-architecture/architecture)
 
 The app is broken down into pieces otherwise called components. Recall that components are self contained: can handle their own logic, make network and host of other things. Components are later composed where and when needed.
 
