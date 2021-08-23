@@ -8,6 +8,11 @@ In the project directory, you can run:
 
 ### `yarn start`
 
+Runs the app in the production build mode.\
+
+
+### `yarn start-dev`
+
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
@@ -19,7 +24,7 @@ You will also see any lint errors in the console.
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `yarn build`
+### `yarn build-react`
 
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
@@ -39,8 +44,17 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+## Architecture
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The app is structure following the MVP(model, view, presenter) architecture. This type of architecture cuts aross all frontend app development therereby making the codebase maintainable, testable and scalable. You can learn more [here](https://khalilstemmler.com/articles/client-side-architecture/architecture)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The app is broken down into pieces otherwise called components. Recall that components are self contained: can handle their own logic, make network and host of other things. Components are later composed where and when needed.
+
+A notable technology used in the development of the app is redux saga. Redux sagas are used to perform asynchronous operations like fetching data from the backend. It is a middleware that is used within the layer of redux to dispatch impure actions
+
+## App Functionslities
+- List all prodcuts
+- Filter products by brands, tags, and product types
+- Sort products by price or date added
+- Add product to basket
+- Remove product from basket
