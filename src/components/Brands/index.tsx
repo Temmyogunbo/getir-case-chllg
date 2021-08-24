@@ -1,6 +1,6 @@
 import { Brand } from '../Brand';
 import React from 'react';
-import { SearchInput } from '../SearchInput';
+import { SearchInput } from '../common/SearchInput';
 import { useBrands } from './useBrands';
 import { Loading } from '../common/Loader';
 

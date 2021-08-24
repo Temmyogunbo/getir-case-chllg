@@ -98,4 +98,3 @@ export const setItemType = (itemType: ItemTypes) => ({
   type: SET_ITEM_TYPE,
   itemType,
 });
-

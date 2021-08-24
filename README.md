@@ -10,7 +10,6 @@ In the project directory, you can run:
 
 Runs the app in the production build mode.\
 
-
 ### `yarn start-dev`
 
 Runs the app in the development mode.\
@@ -53,6 +52,7 @@ The app is broken down into pieces otherwise called components. Recall that comp
 A notable technology used in the development of the app is redux saga. Redux sagas are used to perform asynchronous operations like fetching data from the backend. It is a middleware that is used within the layer of redux to dispatch impure actions
 
 ## App Functionslities
+
 - List all prodcuts
 - Filter products by brands, tags, and product types
 - Sort products by price or date added

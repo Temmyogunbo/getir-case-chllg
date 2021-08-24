@@ -1,4 +1,4 @@
-import { Checkbox } from '../CheckBox';
+import { Checkbox } from '../common/CheckBox';
 import { CheckBoxType, ICompany } from '../../types';
 
 export const Brand = ({

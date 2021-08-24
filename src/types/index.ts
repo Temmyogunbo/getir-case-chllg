@@ -3,17 +3,12 @@ export enum CheckBoxType {
   Square = 'Square',
 }
 
-export enum ProductType {
-  mug = 'mug',
-  shirt = 'shirt',
-}
-
 export interface IProduct {
   price: string;
   name: string;
   description: string;
   manufacturer: string;
-  itemType: ProductType;
+  itemType: ItemTypes;
   tags: string[];
   added: number;
   slug: string;

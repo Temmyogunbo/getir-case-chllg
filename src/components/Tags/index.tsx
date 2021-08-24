@@ -1,4 +1,4 @@
-import { SearchInput } from '../SearchInput';
+import { SearchInput } from '../common/SearchInput';
 import { Tag } from '../Tag';
 import React from 'react';
 import { useTags } from './useTags';

@@ -1,4 +1,4 @@
-import { Checkbox } from '../CheckBox';
+import { Checkbox } from '../common/CheckBox';
 import { CheckBoxType } from '../../types';
 import { useSort } from './useSort';
 import { SortBy } from '../../types';
