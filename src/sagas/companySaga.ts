@@ -2,10 +2,10 @@ import { put, takeLatest, call } from 'redux-saga/effects';
 import axios from 'axios';
 import { API_URL } from '../config/env';
 import { GET_COMPANIES } from '../constants';
-import { IProduct } from '../types';
+import { ICompany } from '../types';
 import { getCompaniesSuccess, getCompaniesFailure } from '../actions';
 
-const getCompanies = () => axios.get<IProduct[]>(`${API_URL}/companies`);
+const getCompanies = () => axios.get<ICompany[]>(`${API_URL}/companies`);
 
 function* fetchCompanies(): any {
   try {
