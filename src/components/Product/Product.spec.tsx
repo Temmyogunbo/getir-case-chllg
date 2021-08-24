@@ -1,5 +1,5 @@
 import { Product } from './index';
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import { ItemTypes } from '../../types';
 
@@ -10,7 +10,7 @@ describe('Procduct Component', () => {
     description: 'test',
     manufacturer: 'test',
     itemType: ItemTypes.Mug,
-    tags: 'Trees',
+    tags: ['Trees'],
     added: 12345,
     slug: 'test',
   };

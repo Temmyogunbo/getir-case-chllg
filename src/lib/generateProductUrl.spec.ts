@@ -2,7 +2,7 @@ import { generateProductURL } from './generateProductUrl';
 import { API_URL, PAGE_SIZE } from '../config/env';
 
 describe('Product URL', () => {
-  it('should return product url without query', () => {
+  it('should return product url without queries', () => {
     expect(
       generateProductURL({
         tags: [],
