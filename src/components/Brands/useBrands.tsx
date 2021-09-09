@@ -1,22 +1,12 @@
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { ICompany, IProduct } from '../../types';
 import compact from 'lodash.compact';
 import { setBrands, getProducts, setAllBrands } from '../../actions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getCompanies } from '../../selectors/companies';
 import { getProducts as getStateProducts } from '../../selectors/products';
 import { getSelectedBrands } from '../../selectors/brand';
 import { search } from '../../utils/search';
-
-// export const searchBrands = (searchValue: string) => ( brands: ICompany[]) => {
-//   if(!searchValue) return ([]);
-
-//   return brands.map(brand => {
-//     if(brand.name.toLowerCase().includes(searchValue.toLowerCase())) return brand;
-//     return null;
-//   });
-// }
 
 const getBrandsSlug = (companies: ICompany[]) =>
   companies.map(({ slug }) => slug);
