@@ -6,9 +6,11 @@ import isEmpty from 'lodash.isempty';
 
 export const Products = () => {
   const { models, operations } = useProducts();
-  const { products } = models;
+  const { products, hasError, errorMessage } = models;
   const { handleSetProduct, handleSetItemType } = operations;
 
+  if (hasError) return <div>{errorMessage}</div>;
+  
   if (isEmpty(products)) return <Loading />;
 
   return (

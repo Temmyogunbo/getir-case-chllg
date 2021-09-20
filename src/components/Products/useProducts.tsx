@@ -1,6 +1,6 @@
 import { IProduct, IOrder, ItemTypes } from '../../types';
 import { useSelector, useDispatch } from 'react-redux';
-import { getProducts } from '../../selectors/products';
+import { getProducts, hasProductsError, getProductsError } from '../../selectors/products';
 import { getOrders } from '../../selectors/orders';
 import {
   setOrder,
@@ -11,6 +11,9 @@ import {
 
 export const useProducts = () => {
   const products = useSelector(getProducts);
+  const hasError = useSelector(hasProductsError);
+  const errorMessage = useSelector(getProductsError);
+
   const orders = useSelector(getOrders);
 
   const dispatch = useDispatch();
@@ -34,7 +37,7 @@ export const useProducts = () => {
   };
 
   return {
-    models: { products },
+    models: { products, hasError, errorMessage },
     operations: { handleSetProduct, handleSetItemType },
   };
 };

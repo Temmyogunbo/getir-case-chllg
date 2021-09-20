@@ -37,9 +37,8 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
-    "start": "node server.js",
-    "start-dev": "craco start",
-    "build-react": "craco build",
+    "start": "craco start",
+    "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject"
   },
@@ -79,6 +78,6 @@
     "eslint-plugin-react": "^7.24.0",
     "postcss": "^7",
     "postcss-loader": "^6.1.1",
-    "prettier": "^2.3.2"
+    "prettier": "^2.4.0"
   }
 }

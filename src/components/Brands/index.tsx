@@ -7,8 +7,10 @@ import { Loading } from '../common/Loader';
 export const Brands = () => {
   const { models, operations } = useBrands();
 
-  const { brands, searchValue } = models;
+  const { brands, searchValue, hasError, errorMessage } = models;
   const { handleSearch, handleBrand, countBrand, isBrandSelected } = operations;
+
+  if (hasError) return <div>{errorMessage}</div>;
 
   if (brands && brands?.length <= 1) return <Loading />;
 

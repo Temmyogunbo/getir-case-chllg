@@ -3,7 +3,7 @@ import { ICompany, IProduct } from '../../types';
 import compact from 'lodash.compact';
 import { setBrands, getProducts, setAllBrands } from '../../actions';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCompanies } from '../../selectors/companies';
+import { getCompanies , getCompaniesError, hasCompaniesError} from '../../selectors/companies';
 import { getProducts as getStateProducts } from '../../selectors/products';
 import { getSelectedBrands } from '../../selectors/brand';
 import { search } from '../../utils/search';
@@ -13,6 +13,9 @@ const getBrandsSlug = (companies: ICompany[]) =>
 
 export const useBrands = () => {
   const companies = useSelector(getCompanies);
+  const hasError = useSelector(hasCompaniesError);
+  const errorMessage = useSelector(getCompaniesError);
+
   const selectedBrands = useSelector(getSelectedBrands);
   const products = useSelector(getStateProducts);
 
@@ -71,6 +74,6 @@ export const useBrands = () => {
 
   return {
     operations: { handleSearch, handleBrand, countBrand, isBrandSelected },
-    models: { brands, searchValue },
+    models: { brands, searchValue, hasError, errorMessage },
   };
 };
