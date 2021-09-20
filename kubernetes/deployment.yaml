@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: web
+  template:
+    metadata:
+      labels:
+        run: web
+    spec:
+      containers:
+      - image: temmyogunbo/getir:1.0
+        name: getir
+        env:
+          - name: REACT_APP_API_URL
+            valueFrom:
+              configMapKeyRef:
+                name: env-file
+                key: REACT_APP_API_URL
+
+          - name: REACT_APP_PAGE_SIZE
+            valueFrom:
+              configMapKeyRef:
+                name: env-file
+                key: REACT_APP_PAGE_SIZE
+          
+        volumeMounts:
+          - name: config
+            mountPath: "/config"
+            readOnly: true
+          
+        ports:
+          - containerPort: 8080
+            protocol: TCP
+        resources:
+          limits: 
+            cpu: 250m
+            memory: 1Gi
+              # You must specify requests for CPU to autoscale
+              # based on CPU utilization
+          requests:
+            cpu: 250m
+            memory: 1Gi
+      volumes:
+        # You set volumes at the Pod level, then mount them into containers inside that Pod
+        - name: config
+          configMap:
+            # Provide the name of the ConfigMap you want to mount.
+            name: env-file
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web
+spec:
+  type: LoadBalancer
+  sessionAffinity: ClientIP
+  selector:
+    app: web
+  ports:
+  - protocol: TCP
+    port: 60000
+    targetPort: 80
