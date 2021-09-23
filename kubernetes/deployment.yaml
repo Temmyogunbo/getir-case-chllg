@@ -15,7 +15,13 @@ spec:
       containers:
       - image: temmyogunbo/getir:1.0
         name: getir
+        command: ["/bin/sh", "-c"]
+        args: 
+          - yarn add -D npm:@tailwindcss/postcss7-compat
+          - yarn start
         env:
+          # - name: "PORT"
+          #   value: "50001"
           - name: REACT_APP_API_URL
             valueFrom:
               configMapKeyRef:
@@ -34,7 +40,7 @@ spec:
             readOnly: true
           
         ports:
-          - containerPort: 8080
+          - containerPort: 50001
             protocol: TCP
         resources:
           limits: 
@@ -55,13 +61,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: web
+  name: web-service
 spec:
   type: LoadBalancer
-  sessionAffinity: ClientIP
+  # sessionAffinity: ClientIP
   selector:
     app: web
   ports:
   - protocol: TCP
     port: 60000
-    targetPort: 80
+    targetPort: 50001
