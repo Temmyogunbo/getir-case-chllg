@@ -13,11 +13,10 @@ spec:
         run: web
     spec:
       containers:
-      - image: temmyogunbo/getir:3.0
+      - image: temmyogunbo/getir:1.0
         name: getir
         command: ["/bin/sh", "-c"]
         args: 
-          # - yarn add -D npm:@tailwindcss/postcss7-compat
           - yarn start
         env:
           - name: REACT_APP_API_URL
