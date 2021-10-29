@@ -30,7 +30,7 @@ jobs: # A basic unit of work in a run
           tag: '0.1.${CIRCLE_SHA1}'
       
       - docker/push:
-          image: '${DOCKERHUB_LOGIN}/getir:0.1.${CIRCLE_SHA1}'
+          image: '${DOCKERHUB_LOGIN}/getir'
 
   build:
     docker:
