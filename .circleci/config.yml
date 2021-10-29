@@ -7,9 +7,32 @@ orbs:
   node: circleci/node@4.7
   gcp-cli: circleci/gcp-cli@2.2.0
   gke: circleci/gcp-gke@1.1.0
-  docker: circleci/docker@1.7.0
+  docker: circleci/docker@1.4.0
 
 jobs: # A basic unit of work in a run
+  dockerize:
+    executor: docker/docker
+    steps:
+      - run:
+          name: Set Environment
+          command: |
+            echo 'export DOCKER_IMAGE=getir' >> $BASH_ENV
+      - setup_remote_docker:
+          version: 19.03.13
+      - checkout
+      - docker/check:
+          docker-username: DOCKERHUB_LOGIN
+          docker-password: DOCKERHUB_PASSWORD
+
+      - docker/build:
+          extra_build_args: '--build-arg REACT_APP_API_URL=${REACT_APP_API_URL} --build-arg REACT_APP_PAGE_SIZE=${REACT_APP_PAGE_SIZE}'
+          image: ${DOCKER_IMAGE}
+          tag: '0.1.${CIRCLE_SHA1}'
+      
+      - docker/push:
+          image: ${DOCKER_IMAGE}
+          tag: '0.1.${CIRCLE_SHA1}'
+
   build:
     docker:
       - image: cimg/node:16.6.0
@@ -54,18 +77,7 @@ workflows: # A sequence of build steps using an executor or docker image
     jobs: # A basic unit of work in a run
       - build
 
-      - docker/publish:
-          executor:
-            image: circleci/node
-            name: docker/docker
-            tag: boron-browsers
-          extra_build_args: '--build-arg REACT_APP_API_URL=${REACT_APP_API_URL} --build-arg REACT_APP_PAGE_SIZE=${REACT_APP_PAGE_SIZE}'
-          image: getir
-          tag: '0.1.${CIRCLE_SHA1}'
-          use-remote-docker: true
-          after_checkout:
-            - setup_remote_docker:
-                version: 19.03.13
+      - dockerize:
           requires:
             - build
           filters: 
@@ -75,7 +87,7 @@ workflows: # A sequence of build steps using an executor or docker image
 
       - deploy_k8:
           requires:
-            - docker/publish
+            - dockerize
           filters:
             branches:
               only:
