@@ -63,6 +63,9 @@ workflows: # A sequence of build steps using an executor or docker image
           image: getir
           tag: '0.1.${CIRCLE_SHA1}'
           use-remote-docker: true
+          after_checkout:
+            - setup_remote_docker:
+                version: 19.03.13
           requires:
             - build
           filters: 
