@@ -23,5 +23,3 @@ yarn-error.log*
 
 .prettierignore
 
-package-lock.json
-yarn.lock

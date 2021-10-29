@@ -40,7 +40,7 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
-    "test": "CI=true  SKIP_PREFLIGHT_CHECK=true  craco test",
+    "test": "CI=true craco test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
