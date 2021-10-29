@@ -62,7 +62,7 @@ workflows: # A sequence of build steps using an executor or docker image
           extra_build_args: '--build-arg REACT_APP_API_URL=${REACT_APP_API_URL} --build-arg REACT_APP_PAGE_SIZE=${REACT_APP_PAGE_SIZE}'
           image: getir
           tag: '0.1.${CIRCLE_SHA1}'
-          use-docker-credentials-store: false
+          use-remote-docker: true
           requires:
             - build
           filters: 
