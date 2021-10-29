@@ -17,7 +17,8 @@ jobs: # A basic unit of work in a run
           name: Set Environment
           command: |
             echo 'export DOCKER_IMAGE=temmyogunbo/getir' >> $BASH_ENV
-      - setup_remote_docker
+      - setup_remote_docker:
+          version: 19.03.13
       - checkout
       - docker/check:
           docker-username: DOCKERHUB_LOGIN
