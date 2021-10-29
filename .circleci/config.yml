@@ -9,7 +9,7 @@ orbs:
   gke: circleci/gcp-gke@1.1.0
   docker: circleci/docker@1.4.0
 
-jobs:
+jobs: # A basic unit of work in a run
   dockerize:
     executor: docker/docker
     steps:
@@ -70,7 +70,7 @@ jobs:
           tag: ${CIRCLE_SHA1}
 #   # deploy_App_Engine:
 
-workflows:
+workflows: # A sequence of build steps using an executor or docker image
   build: # This is the name of the workflow, 
     jobs: # A basic unit of work in a run
       - build
