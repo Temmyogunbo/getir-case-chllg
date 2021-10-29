@@ -24,13 +24,14 @@ jobs: # A basic unit of work in a run
           docker-username: DOCKERHUB_LOGIN
           docker-password: DOCKERHUB_PASSWORD
 
-      - docker/build:
+      - docker/publish:
           extra_build_args: '--build-arg REACT_APP_API_URL=${REACT_APP_API_URL} --build-arg REACT_APP_PAGE_SIZE=${REACT_APP_PAGE_SIZE}'
-          image: ${DOCKER_IMAGE}
+          image: getir
           tag: '0.1.${CIRCLE_SHA1}'
+          use-docker-credentials-store: true
       
-      - docker/push:
-          image: '${DOCKERHUB_LOGIN}/getir'
+      # - docker/push:
+      #     image: '${DOCKERHUB_LOGIN}/getir'
 
   build:
     docker:
