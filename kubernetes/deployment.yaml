@@ -64,3 +64,79 @@ spec:
           configMap:
             # Provide the name of the ConfigMap you want to mount.
             name: env-file
+
+---
+  apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      cloud.google.com/neg: '{"ingress":true}'
+    creationTimestamp: "2021-10-15T12:48:26Z"
+    finalizers:
+    - service.kubernetes.io/load-balancer-cleanup
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          f:externalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":80,"protocol":"TCP"}:
+              .: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector:
+            .: {}
+            f:run: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: GoogleCloudConsole
+      operation: Update
+      time: "2021-10-15T12:48:26Z"
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:finalizers:
+            .: {}
+            v:"service.kubernetes.io/load-balancer-cleanup": {}
+        f:status:
+          f:loadBalancer:
+            f:ingress: {}
+      manager: kube-controller-manager
+      operation: Update
+      time: "2021-10-15T12:48:59Z"
+    name: web-service
+    namespace: default
+    resourceVersion: "10373820"
+    uid: 65a47224-312a-4d6b-bb22-0f8ca6d17612
+  spec:
+    clusterIP: 10.20.0.168
+    clusterIPs:
+    - 10.20.0.168
+    externalTrafficPolicy: Cluster
+    ports:
+    - nodePort: 30647
+      port: 80
+      protocol: TCP
+      targetPort: 3000
+    selector:
+      run: web
+    sessionAffinity: None
+    type: LoadBalancer
+  status:
+    loadBalancer:
+      ingress:
+      - ip: 35.222.67.225
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: env-file
+  namespace: default
+data:
+  REACT_APP_API_URL: "https://emmanuel-json-webserver.herokuapp.com"
+  REACT_APP_PAGE_SIZE: "16"

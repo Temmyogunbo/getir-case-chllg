@@ -1,0 +1,107 @@
+# This config is equivalent to both the '.circleci/extended/orb-free.yml' and the base '.circleci/config.yml'
+version: 2.1
+
+# Orbs are reusable packages of CircleCI configuration that you may share across projects, enabling you to create encapsulated, parameterized commands, jobs, and executors that can be used across multiple projects.
+# See: https://circleci.com/docs/2.0/orb-intro/
+orbs:
+  node: circleci/node@4.7
+  gcp-cli: circleci/gcp-cli@2.2.0
+  gke: circleci/gcp-gke@1.1.0
+  docker: circleci/docker@1.4.0
+
+jobs:
+  dockerize:
+    executor: docker/docker
+
+    steps:
+      - run:
+        name: Set Environment
+        command: |
+        echo 'export DOCKER_IMAGE=temmyogunbo/getir' >> $BASH_ENV
+      - setup_remote_docker
+      - checkout
+      - docker/check:
+          docker-username: DOCKERHUB_LOGIN
+          docker-password: DOCKERHUB_PASSWORD
+
+      - docker/publish:
+          extra_build_args: '--build-arg REACT_APP_API_URL=${REACT_APP_API_URL} --build-arg REACT_APP_PAGE_SIZE=${REACT_APP_PAGE_SIZE}'
+          image: ${DOCKER_IMAGE}
+          tag: '0.1.${CIRCLE_SHA1}'
+      
+
+      # - run: 
+      #   name: Setup
+      #   command: |
+      #     echo 'export TAG=0.1.${CIRCLE_BUILD_NUM}' >> $BASH_ENV
+      #     echo 'export IMAGE_NAME=getir' >> $BASH_ENV 
+
+      # - run:
+      #   name: Build and push Docker image
+      #   command: |
+      #   docker build \
+      #     --build-arg REACT_APP_API_URL=${REACT_APP_API_URL} \
+      #     --build-arg REACT_APP_PAGE_SIZE=${REACT_APP_PAGE_SIZE} \
+      #     -t temmyogunbo/$IMAGE_NAME:$TAG .
+      #   echo $DOCKER_PWD | docker login -u $DOCKER_LOGIN --password-stdin
+      #   docker push temmyogunbo/$IMAGE_NAME:$TAG
+
+  build:
+    docker:
+      - image: cimg/node:16.6.0
+
+    steps:
+      - checkout
+      - restore_cache:
+        keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          - v1-dependencies-
+      - run:
+          name: Install dependencies
+          command: npm install
+      
+      - save_cache:
+        paths:
+          - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      - run:
+        name: Run tests
+        command: npm test
+  
+  deploy_k8:
+    machine: true
+    steps:
+      - run:
+        name: Set Environment
+        command: |
+        echo 'export DOCKER_IMAGE=temmyogunbo/getir' >> $BASH_ENV
+      
+      - gke/install
+      - gke/update-kubeconfig-with-credentials:
+        cluster: ${GCLOUD_CLUSTER}
+        deployment: web
+        container: getir
+        image: ${DOCKER_IMAGE}
+        tag: ${CIRCLE_SHA1}
+  # deploy_App_Engine:
+
+workflows:
+  build: # This is the name of the workflow, 
+    jobs: # A basic unit of work in a run
+      - build
+
+      - dockerize:
+          requires:
+            - build
+          filters: 
+            branches:
+              only:
+                - main
+
+      - deploy_k8:
+          requires:
+            - dockerize
+          filters:
+            branches:
+              only:
+                - main
