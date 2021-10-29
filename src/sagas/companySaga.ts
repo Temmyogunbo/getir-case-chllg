@@ -11,7 +11,7 @@ function* fetchCompanies(): any {
   try {
     const response = yield call(getCompanies);
     yield put(getCompaniesSuccess(response.data));
-  } catch (error) {
+  } catch (error: any) {
     yield put(getCompaniesFailure(error.message));
   }
 }

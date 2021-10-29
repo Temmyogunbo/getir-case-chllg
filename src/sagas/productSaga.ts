@@ -36,7 +36,7 @@ function* fetchProducts(action: any): any {
       products: response.data,
       count: parseInt(response['headers']['x-total-count']),
     });
-  } catch (error) {
+  } catch (error: any) {
     yield put({ type: PRODUCTS_FAILED, message: error.message });
   }
 }
