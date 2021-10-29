@@ -21,8 +21,8 @@ jobs: # A basic unit of work in a run
           version: 19.03.13
       - checkout
       - docker/check:
-          docker-username: DOCKERHUB_LOGIN
-          docker-password: DOCKERHUB_PASSWORD
+          docker-username: DOCKER_LOGIN
+          docker-password: DOCKER_PASSWORD
 
       - docker/build:
           extra_build_args: '--build-arg REACT_APP_API_URL=${REACT_APP_API_URL} --build-arg REACT_APP_PAGE_SIZE=${REACT_APP_PAGE_SIZE}'
