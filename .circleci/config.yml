@@ -64,11 +64,12 @@ jobs: # A basic unit of work in a run
       - gke/install
       - gke/update-kubeconfig-with-credentials:
           cluster: ${GCLOUD_CLUSTER}
+          perform-login: true
       - gke/rollout-image:
           cluster: ${GCLOUD_CLUSTER}
           deployment: web
           container: getir
-          image: ${DOCKER_IMAGE}
+          image: '${DOCKER_LOGIN}/${DOCKER_IMAGE}'
           tag: '0.1.${CIRCLE_SHA1}'
 #   # deploy_App_Engine:
 
