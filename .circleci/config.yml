@@ -26,7 +26,7 @@ jobs: # A basic unit of work in a run
 
       - docker/build:
           extra_build_args: '--build-arg REACT_APP_API_URL=${REACT_APP_API_URL} --build-arg REACT_APP_PAGE_SIZE=${REACT_APP_PAGE_SIZE}'
-          image: ${DOCKER_IMAGE}
+          image: '${DOCKER_LOGIN}/${DOCKER_IMAGE}'
           tag: '0.1.${CIRCLE_SHA1}'
       
       - docker/push:
@@ -69,7 +69,7 @@ jobs: # A basic unit of work in a run
           deployment: web
           container: getir
           image: ${DOCKER_IMAGE}
-          tag: ${CIRCLE_SHA1}
+          tag: '0.1.${CIRCLE_SHA1}'
 #   # deploy_App_Engine:
 
 workflows: # A sequence of build steps using an executor or docker image
