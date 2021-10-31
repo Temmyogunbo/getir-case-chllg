@@ -15,6 +15,7 @@ spec:
       containers:
       - image: temmyogunbo/getir:1.0
         name: getir
+        imagePullPolicy: Always
         command: ["/bin/sh", "-c"]
         args: 
           - yarn start
@@ -64,6 +65,8 @@ spec:
           configMap:
             # Provide the name of the ConfigMap you want to mount.
             name: env-file
+      imagePullSecrets:
+        - name: regcred
 
 ---
   apiVersion: v1
