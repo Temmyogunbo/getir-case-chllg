@@ -40,7 +40,7 @@
   "scripts": {
     "start": "node server.js",
     "start-dev": "craco start",
-    "build": "CI=true craco build",
+    "build": "CI=true SKIP_PREFLIGHT_CHECK=true craco build",
     "test": "CI=true  SKIP_PREFLIGHT_CHECK=true  craco test",
     "eject": "react-scripts eject"
   },
