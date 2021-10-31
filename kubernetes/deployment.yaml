@@ -16,9 +16,6 @@ spec:
       - image: temmyogunbo/getir:1.0
         name: getir
         imagePullPolicy: Always
-        command: ["/bin/sh", "-c"]
-        args: 
-          - yarn start
         env:
           - name: REACT_APP_API_URL
             valueFrom:

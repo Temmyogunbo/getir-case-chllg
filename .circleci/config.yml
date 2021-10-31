@@ -50,9 +50,14 @@ jobs: # A basic unit of work in a run
       - save_cache:
           paths: node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
+          
       - run:
           name: Run tests
           command: npm test
+      
+      - run:
+          name: Build app
+          command: npm run build
   
   deploy_k8:
     machine: true
@@ -76,7 +81,23 @@ jobs: # A basic unit of work in a run
           container: getir
           image: '${DOCKER_LOGIN}/${DOCKER_IMAGE}'
           tag: '0.1.${CIRCLE_SHA1}'
-#   # deploy_App_Engine:
+
+  deploy_on_app_engine:
+    machine: true
+    steps:
+      - checkout
+      - gcp-cli/install
+      - gcp-cli/initialize
+
+      - run:
+          name: Copy across app.yaml config
+          command: ./app.yaml.sh > ./app.yaml
+
+      - run:
+          name: Deploy to App Engine
+          command: google cloud deploy app.yaml
+
+            
 
 workflows: # A sequence of build steps using an executor or docker image
   deploy: # This is the name of the workflow, 
@@ -92,7 +113,7 @@ workflows: # A sequence of build steps using an executor or docker image
                 - main
       
       - deploy_k8:
-          name: deploy-staging
+          name: deploy-k8-on-staging
           requires:
             - dockerize
           filters:
@@ -103,11 +124,21 @@ workflows: # A sequence of build steps using an executor or docker image
       - approve_prod_deployment:
           type: approval
           requires:
-            - deploy-staging
+            - deploy-k8-on-staging
+            - deploy-app-engine-on-staging
 
       - deploy_k8:
           name: deploy-prod
           context: production
           requires:
             - approve_prod_deployment
+
+      - deploy_on_app_engine:
+          name: deploy-app-engine-on-staging
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - main
 
