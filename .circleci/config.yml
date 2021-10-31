@@ -72,7 +72,7 @@ jobs: # A basic unit of work in a run
 
       - gke/rollout-image:
           cluster: ${GCLOUD_CLUSTER}
-          deployment: web
+          deployment: ~/kubernetes/deployment.yaml
           container: getir
           image: '${DOCKER_LOGIN}/${DOCKER_IMAGE}'
           tag: '0.1.${CIRCLE_SHA1}'
