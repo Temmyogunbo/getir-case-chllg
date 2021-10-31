@@ -57,19 +57,16 @@ jobs: # A basic unit of work in a run
   deploy_k8:
     machine: true
     steps:
-      - docker/check:
-          docker-username: DOCKER_LOGIN
-          docker-password: DOCKER_PASSWORD
       - run:
           name: Set Environment
-          command: echo 'export DOCKER_IMAGE=temmyogunbo/getir' >> $BASH_ENV
+          command: echo 'export DOCKER_IMAGE=getir' >> $BASH_ENV
           
       - gke/install
       - gke/update-kubeconfig-with-credentials:
           cluster: ${GCLOUD_CLUSTER}
           perform-login: true
       - run:
-          name: Create DOcker create
+          name: Create DOcker secret
           command: |
             kubectl create secret docker-registry regcred --docker-server=https://index.docker.io/v1/ --docker-username=${DOCKER_LOGIN} --docker-password=${DOCKER_PASSWORD} --docker-email=${DOCKER_EMAIL}
 
