@@ -18,7 +18,7 @@ function App() {
   useEffect(() => {
     dispatch(getProducts());
     dispatch(getCompanies());
-  }, []);
+  });
 
   const toggleMobileOrder = () => setShowMobileOrder(!showMobileOrder);
 

@@ -7,5 +7,6 @@ export const search =
         if (item.toLowerCase().includes(searchValue.toLowerCase())) return item;
       }
       if (item.toLowerCase().includes(searchValue.toLowerCase())) return item;
+      return null
     });
   };

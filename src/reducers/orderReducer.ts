@@ -26,7 +26,7 @@ export const orderReducer = (state = { orders: [] }, action: any) => {
     case DECREMENT_ORDER: {
       const orders = state.orders.map((order: IOrder) => {
         if (order.slug === action.order.slug) {
-          if (action.order.count! === 1) return;
+          if (action.order.count! === 1) return null;
           return {
             slug: order.slug,
             name: order.name,
