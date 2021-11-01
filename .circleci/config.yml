@@ -92,7 +92,7 @@ jobs: # A basic unit of work in a run
       - run:
           name: Copy across app.yaml config
           command: |
-            chown -R $USER:$USER ./app.yaml.sh
+            chmod +x ./app.yaml.sh
             ./app.yaml.sh > ./app.yaml
 
       - run:
