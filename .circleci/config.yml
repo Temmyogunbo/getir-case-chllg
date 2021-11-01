@@ -50,14 +50,14 @@ jobs: # A basic unit of work in a run
       - save_cache:
           paths: node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-          
+
       - run:
           name: Run tests
           command: npm test
       
-      - run:
-          name: Build app
-          command: npm run build
+      # - run:
+      #     name: Build app
+      #     command: npm run build
   
   deploy_k8:
     machine: true
