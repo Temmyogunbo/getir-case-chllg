@@ -97,7 +97,9 @@ jobs: # A basic unit of work in a run
 
       - run:
           name: Deploy to App Engine
-          command: gcloud app deploy app.yaml
+          command: |
+            echo '$GOOGLE_PROJECT_ID'
+            gcloud app deploy app.yaml
 
             
 
