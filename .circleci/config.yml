@@ -91,7 +91,9 @@ jobs: # A basic unit of work in a run
 
       - run:
           name: Copy across app.yaml config
-          command: sh ./app.yaml.sh > ./app.yaml
+          command: |
+            chown -R $USER:$USER ./app.yaml.sh
+            ./app.yaml.sh > ./app.yaml
 
       - run:
           name: Deploy to App Engine
