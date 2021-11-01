@@ -1,7 +1,0 @@
-runtime: nodejs14
-env: standard
-
-env_variables:
-  REACT_APP_API_URL: https://emmanuel-json-webserver.herokuapp.com
-  REACT_APP_PAGE_SIZE: 16
-  

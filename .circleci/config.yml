@@ -89,11 +89,11 @@ jobs: # A basic unit of work in a run
       - gcp-cli/install
       - gcp-cli/initialize
 
-      # - run:
-      #     name: Copy across app.yaml config
-      #     command: |
-      #       chmod +x ./app.yaml.sh
-      #       ./app.yaml.sh > ./app.yaml
+      - run:
+          name: Copy across app.yaml config
+          command: |
+            chmod +x ./app.yaml.sh
+            ./app.yaml.sh > ./app.yaml
 
       - run:
           name: Deploy to App Engine
