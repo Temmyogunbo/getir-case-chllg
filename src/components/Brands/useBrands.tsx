@@ -31,7 +31,7 @@ export const useBrands = () => {
   }, [companies]);
 
   const isBrandSelected = (brand: string) => {
-    return selectedBrands.includes(brand);
+    return selectedBrands?.includes(brand);
   };
 
   const handleBrand = (brand: ICompany) => {

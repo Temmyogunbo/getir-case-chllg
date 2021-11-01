@@ -7,11 +7,11 @@ export const tagReducer = (state = { tags: [] }, action: any) => {
         return { ...state, tags: [action.tag] };
       }
       //@ts-ignore
-      if (state.tags.includes('All')) {
+      if (state?.tags?.includes('All')) {
         return { ...state, tags: [] };
       }
       //@ts-ignore
-      if (state.tags.includes(action.tag)) {
+      if (state?.tags?.includes(action.tag)) {
         const filteredTags = state.tags.filter((tag) => tag !== action.tag);
         return { ...state, tags: filteredTags };
       }

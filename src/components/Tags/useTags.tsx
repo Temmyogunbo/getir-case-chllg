@@ -21,7 +21,7 @@ export const useTags = () => {
 
   const dispatch = useDispatch();
 
-  const isTagSelected = (tag: string) => selectedTags.includes(tag);
+  const isTagSelected = (tag: string) => selectedTags?.includes(tag);
 
   const handleTag = (tag: string) => {
     if (tag === 'All') {

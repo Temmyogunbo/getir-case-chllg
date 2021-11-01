@@ -4,9 +4,9 @@ export const search =
 
     return searchBox.map((item) => {
       if (key) {
-        if (item.toLowerCase().includes(searchValue.toLowerCase())) return item;
+        if (item?.toLowerCase().includes(searchValue.toLowerCase())) return item;
       }
-      if (item.toLowerCase().includes(searchValue.toLowerCase())) return item;
+      if (item?.toLowerCase().includes(searchValue.toLowerCase())) return item;
       return null
     });
   };

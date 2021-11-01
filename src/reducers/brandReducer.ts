@@ -7,11 +7,11 @@ export const brandReducer = (state = { brands: [] }, action: any) => {
         return { ...state, brands: [action.brand] };
       }
       //@ts-ignore
-      if (state.brands.includes('All')) {
+      if (state?.brands?.includes('All')) {
         return { ...state, brands: [] };
       }
       //@ts-ignore
-      if (state.brands.includes(action.brand)) {
+      if (state?.brands?.includes(action.brand)) {
         const filteredBrands = state.brands.filter(
           (brand) => brand !== action.brand,
         );
