@@ -97,7 +97,7 @@ jobs: # A basic unit of work in a run
 
       - run:
           name: Deploy to App Engine
-          command: google cloud deploy app.yaml
+          command: gcloud app deploy app.yaml
 
             
 
